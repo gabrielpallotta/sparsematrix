@@ -1,0 +1,3 @@
+[submodule "include/avltree"]
+	path = include/avltree
+	url = https://github.com/gabrielpallotta/avltree.git
