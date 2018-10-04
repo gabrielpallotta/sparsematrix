@@ -34,6 +34,9 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="include/MatrixElement.hpp" />
+		<Unit filename="include/SparseMatrix.hpp" />
+		<Unit filename="include/avltree/include/AvlTree.hpp" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion />
