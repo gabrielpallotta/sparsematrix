@@ -43,10 +43,11 @@ class SparseMatrix
       MatrixElement<T>* column = line->getInfo()->get(MatrixElement<T> (c));
       if (column == nullptr) {
         column = new MatrixElement<T> (c, v);
-        line->getInfo()->add(MatrixElement<T> (c, v));
       } else {
-        column->setInfo(v);
+        line->getInfo()->remove(MatrixElement<T> (c));
       }
+
+      line->getInfo()->add(MatrixElement<T> (c, v));
     }
 
   private:
