@@ -2,6 +2,8 @@
 #define SPARSEMATRIX_H
 
 #include <iostream>
+#include "MatrixElement.hpp"
+#include "AvlTree.hpp"
 
 using namespace std;
 
@@ -12,23 +14,45 @@ class SparseMatrix
     SparseMatrix(const T &defValue)
     {
       this->def = defValue;
-
+      this->elements = new AvlTree<MatrixElement<AvlTree<MatrixElement<T> > > >();
     }
 
     T get (int l, int c)
     {
-      return this->elements->find(l)->find(c);
+      MatrixElement<AvlTree<MatrixElement<T> > >* line = this->elements->get(MatrixElement<AvlTree<MatrixElement<T> > >(l));
+      if (line == nullptr) {
+        return this->def;
+      } else {
+        MatrixElement<T>* column = line->getInfo()->get(MatrixElement<T>(c));
+        if (column == nullptr) {
+          return this->def;
+        } else {
+          return *column->getInfo();
+        }
+      }
     }
 
-    T put (int l, int c, const T &v)
+    void put (int l, int c, const T &v)
     {
+      MatrixElement<AvlTree<MatrixElement<T> > >* line = this->elements->get(MatrixElement<AvlTree<MatrixElement<T> > >(l));
+      if (line == nullptr) {
+        line = new MatrixElement<AvlTree<MatrixElement<T> > >(l, AvlTree<MatrixElement<T> >());
+        this->elements->add(*line);
+      }
 
+      MatrixElement<T>* column = line->getInfo()->get(MatrixElement<T> (c));
+      if (column == nullptr) {
+        column = new MatrixElement<T> (c, v);
+        line->getInfo()->add(MatrixElement<T> (c, v));
+      } else {
+        column->setInfo(v);
+      }
     }
 
   private:
     T def;
-    MatrixElement<MatrixElement<AvlTree<T> > > elements;
-    
-}
+    AvlTree<MatrixElement<AvlTree<MatrixElement<T> > > >* elements;
+
+};
 
 #endif
