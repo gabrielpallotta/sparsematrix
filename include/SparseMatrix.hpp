@@ -12,11 +12,12 @@ class SparseMatrix
     SparseMatrix(const T &defValue)
     {
       this->def = defValue;
+
     }
 
     T get (int l, int c)
     {
-
+      return this->elements->find(l)->find(c);
     }
 
     T put (int l, int c, const T &v)
@@ -26,6 +27,8 @@ class SparseMatrix
 
   private:
     T def;
+    MatrixElement<MatrixElement<AvlTree<T> > > elements;
+    
 }
 
 #endif

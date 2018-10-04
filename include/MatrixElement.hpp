@@ -10,14 +10,15 @@ template <typename T>
 class MatrixElement
 {
   public:
-    MatrixElement()
+    MatrixElement(int key, T info)
     {
-
+      this->key = key;
+      this->info = info;
     }
-
+    
   private:
-    AvlTree tree;
     int key;
+    T info;
 }
 
 #endif
