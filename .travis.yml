@@ -8,4 +8,4 @@ script:
   - cmake -H. -Bbuild
   - make -C build
   - cd build
-  - ctest
+  - ctest --verbose

@@ -2,6 +2,8 @@
 #define SPARSEMATRIX_H
 
 #include <iostream>
+#include <stdexcept>
+
 #include "matrix_element.hpp"
 #include "AvlTree.hpp"
 
