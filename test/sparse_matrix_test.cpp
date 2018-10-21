@@ -1,3 +1,5 @@
+#include <stdexcept>
+
 #include "sparse_matrix.hpp"
 #include "gtest/gtest.h"
 
