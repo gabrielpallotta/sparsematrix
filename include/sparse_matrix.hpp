@@ -2,7 +2,7 @@
 #define SPARSEMATRIX_H
 
 #include <iostream>
-#include "MatrixElement.hpp"
+#include "matrix_element.hpp"
 #include "AvlTree.hpp"
 
 using namespace std;
@@ -34,6 +34,9 @@ class SparseMatrix
 
     void put (int l, int c, const T &v)
     {
+      if (l < 0 || c < 0) {
+        throw std::invalid_argument("Line and column must be greater than zero");
+      }
       MatrixElement<AvlTree<MatrixElement<T> > >* line = this->elements->get(MatrixElement<AvlTree<MatrixElement<T> > >(l));
       if (line == nullptr) {
         line = new MatrixElement<AvlTree<MatrixElement<T> > >(l, AvlTree<MatrixElement<T> >());
