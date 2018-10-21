@@ -1,3 +1,6 @@
 [submodule "deps/avltree"]
 	path = deps/avltree
 	url = https://github.com/gabrielpallotta/avltree
+[submodule "deps/googletest"]
+	path = deps/googletest
+	url = https://github.com/google/googletest
