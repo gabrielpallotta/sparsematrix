@@ -19,6 +19,9 @@ class SparseMatrix
 
     T get (int l, int c)
     {
+      if (l < 0 || c < 0) {
+        throw std::invalid_argument("Line and column must be greater than zero");
+      }
       MatrixElement<AvlTree<MatrixElement<T> > >* line = this->elements->get(MatrixElement<AvlTree<MatrixElement<T> > >(l));
       if (line == nullptr) {
         return this->def;
