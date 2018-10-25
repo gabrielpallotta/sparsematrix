@@ -5,7 +5,7 @@
 #include <stdexcept>
 
 #include "matrix_element.hpp"
-#include "AvlTree.hpp"
+#include "avl_tree.hpp"
 
 using namespace std;
 
