@@ -8,6 +8,8 @@ add_subdirectory(deps/googletest)
 include_directories(include)
 include_directories(deps/avltree/include)
 
+add_executable(sparsematrix ${SOURCE_FILES} main.cpp) 
+
 enable_testing()
 
 file(GLOB TEST_SRC_FILES ${PROJECT_SOURCE_DIR}/test/*.cpp)
