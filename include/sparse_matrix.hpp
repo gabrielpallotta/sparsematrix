@@ -13,6 +13,8 @@ template <typename T>
 class SparseMatrix
 {
   public:
+    SparseMatrix() {}
+
     SparseMatrix(const T &def_value)
     {
       def = def_value;
