@@ -25,7 +25,7 @@ int main()
   while (true) {
     system(CLEAR_CMD);
     cout << "Matriz esparsa:" << endl;
-    matrix.print(cout, 20, 20);
+    matrix.print(cout, 10, 10);
 
     cout << "1 - Inserir" << endl;
     cout << "2 - Consultar" << endl << endl;
