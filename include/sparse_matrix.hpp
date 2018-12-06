@@ -58,12 +58,9 @@ class SparseMatrix
       if (v != def) {
         line->getInfo()->add(MatrixElement<T> (c, v));
       } else {
-        if (l > max_line) {
-          max_line = l + 1;
-        }
-        
+          max_line = this->elements->getBiggestInfo().info;
         if (c > max_column) {
-          max_column = c + 1;
+          max_line = this->elements->getBiggestInfo().info;
         }
       }
 
