@@ -44,31 +44,48 @@ class SparseMatrix
       if (l < 0 || c < 0) {
         throw std::invalid_argument("Line and column must be greater than zero");
       }
+      
       MatrixElement<AvlTree<MatrixElement<T> > >* line = elements->get(MatrixElement<AvlTree<MatrixElement<T> > >(l));
+
       if (line == nullptr) {
-        line = new MatrixElement<AvlTree<MatrixElement<T> > >(l, AvlTree<MatrixElement<T> >());
-        elements->add(*line);
-      }
-
-      MatrixElement<T>* column = line->getInfo()->get(MatrixElement<T> (c));
-      if (column == nullptr) {
-        column = new MatrixElement<T> (c, v);
-      } else {
-        line->getInfo()->remove(MatrixElement<T> (c));
-      }
-
-      if (v != def) {
-        line->getInfo()->add(MatrixElement<T> (c, v));
-      } else {
-          max_line = this->elements->getBiggestInfo().info;
-        if (c > max_column) {
-          max_line = this->elements->getBiggestInfo().info;
+        if (v == def) {
+          return;
+        } else {
+          line = new MatrixElement<AvlTree<MatrixElement<T> > >(l, AvlTree<MatrixElement<T> >());
+          elements->add(*line);
         }
       }
 
+      MatrixElement<T>* column = line->getInfo()->get(MatrixElement<T> (c));
+      MatrixElement<T> new_column = MatrixElement<T> (c, v);
+
+      if (column == nullptr) {
+        if (v == def) {
+          return;
+        } else {
+          line->getInfo()->add(new_column);
+        }
+      } else {  
+        line->getInfo()->remove(*column);
+        if (v != def) {
+          line->getInfo()->add(new_column);
+        }
+        if (line->getInfo()->getHeight() == 0) {
+          elements->remove(*line);
+        }
+      }
+    }
+    
+    void print (ostream& os, int max_line, int max_column)
+    {
+      for (int i = 0; i < max_line; i++) {
+        for (int j = 0; j < max_column; j++) {
+          os << get(i, j) << " ";
+        }
+        os << std::endl;
+      }
     }
 
-    template <typename U> friend ostream& operator<<(ostream& os, const SparseMatrix<U>& matrix);
   private:
     T def;
     int max_line = 0;
@@ -76,19 +93,5 @@ class SparseMatrix
     AvlTree<MatrixElement<AvlTree<MatrixElement<T> > > >* elements;
 
 };
-
-template <typename T>
-ostream& operator<<(ostream& os, const SparseMatrix<T>& matrix)
-{
-  for (int i = 0; i < matrix.max_line; i++) {
-    for (int j = 0; j < matrix.max_column; j++) {
-      os << matrix.get(i, j) << " ";
-    }
-    os << std::endl;
-  }
-
-  return os;
-}
-
 
 #endif

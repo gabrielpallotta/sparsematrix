@@ -15,7 +15,7 @@ using namespace std;
 
 int main()
 {
-  cout << "Digite o valor padrao da arvore: ";
+  cout << "Digite o valor padrao da matriz: ";
 
   int def_value;
   cin >> def_value;
@@ -25,7 +25,7 @@ int main()
   while (true) {
     system(CLEAR_CMD);
     cout << "Matriz esparsa:" << endl;
-    cout << matrix << endl;
+    matrix.print(cout, 20, 20);
 
     cout << "1 - Inserir" << endl;
     cout << "2 - Consultar" << endl << endl;

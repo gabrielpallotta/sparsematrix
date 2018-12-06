@@ -48,4 +48,8 @@ TEST(SparseMatrix, InsertionWorks) {
   ASSERT_EQ(14, matrix->get(0, 0));
   matrix->put(8, 8, 15);
   ASSERT_EQ(15, matrix->get(8, 8));
+  matrix->put(8, 8, 0);
+  ASSERT_EQ(0, matrix->get(8, 8));
+  matrix->put(8, 8, 16);
+  ASSERT_EQ(16, matrix->get(8, 8));
 }
